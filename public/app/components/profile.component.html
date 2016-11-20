@@ -1,0 +1,54 @@
+<div class="w3-container w3-margin-bottom">
+  <form>
+    <input  class="w3-input" type="text" placeholder="Type Github Username....."  [(ngModel)]="username" name="username" (keyup)="searchUser()"/>
+  </form>
+</div>
+
+<div  *ngIf="user">
+  <div class="w3-card-4">
+    <header class="w3-container w3-grey">
+      <h3 class="w3-text-light-grey">{{user.name || 'No Name'}}</h3>
+    </header>
+      <div class="w3-container">
+        <div class="w3-row-padding">
+          <div class="w3-col m3 l3 w3-padding-16">
+              <img src="{{user.avatar_url}}" class="w3-border w3-padding-4 w3-padding-tiny" alt="Avatar Pic" style="width:100%">
+              <a href="{{user.html_url}}" target="_blank" class="w3-btn w3-btn-block w3-light-grey w3-border w3-border-light-grey w3-margin-top">View Profile</a>
+            </div>
+            <div class="w3-col m9 l9 w3-padding-16">
+              <span>Public Repos: <span class="w3-badge w3-grey w3-text-white">{{user.public_repos}}</span></span>
+              <span>Public Gists: <span class="w3-badge w3-indigo">{{user.public_gists}}</span></span>
+              <span>Followers: <span class="w3-badge w3-green">{{user.followers}}</span></span>
+              <span>Following: <span class="w3-badge w3-cyan w3-text-white">{{user.following}}</span></span>
+              <ul class="w3-ul w3-border w3-margin-top">
+                <li><strong>Username: </strong>{{user.login || 'N/A'}}</li>
+                <li><strong>Location: </strong>{{user.location || 'N/A'}}</li>
+                <li><strong>Email: </strong>{{user.email || 'N/A'}}</li>
+                <li><strong>Blog: </strong>{{user.blog || 'N/A'}}</li>
+                <li><strong>Member Since: </strong>{{user.created_at | date: 'dd/MM/yyyy'}}</li>
+              </ul>
+            </div>
+           </div>
+         </div>
+  </div>
+  <div class="w3-card-4 w3-margin-top">
+    <header class="w3-container w3-grey">
+      <h3 class="w3-text-light-grey">User Repos</h3>
+    </header>
+    <div class="w3-container" *ngFor = 'let repo of repos'>
+      <div class="w3-row-padding">
+        <div class="w3-col m9 l9 w3-padding-16">
+          <h4><a href="{{repo.html_url}}" target="_blank" class="w3-text-blue">{{repo.name}}</a></h4>
+          <p>{{repo.description}}</p>
+        </div>
+        <div class="w3-col m3 l3 w3-padding-16"> 
+          <span>Watchers: <span class="w3-badge w3-grey w3-text-white">{{repo.watchers}}</span></span>
+          <span>Forks: <span class="w3-badge w3-cyan w3-text-white">{{repo.forks}}</span></span> 
+        </div>
+       </div>
+       <hr>
+    </div>
+  </div>
+
+      
+</div>

@@ -1,11 +1,12 @@
-const http = require('http');
-const fs = require('fs');
+var express = require('express');
+var app = express();
+var path = require('path');
 
+var __projectRoot = __dirname + '/../../';
 
-function onRequest(req, res){
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  fs.createReadStream('./index.html').pipe(res);
-}
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__projectRoot + '/index.html'));
+});
 
-http.createServer(onRequest).listen(8080);
-console.log('server now runing....')
+console.log('Server up and running....');
+app.listen(8080);
